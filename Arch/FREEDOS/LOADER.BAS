@@ -23,10 +23,19 @@
 ScreenRes 640, 480, 32, , &H1: Cls
 Dim As Integer Index
 For Index = 1 to 150
-   Bload "LIVING.ROO\FRAMES\" + Ltrim(Str$(Index)) + ".bmp", 0 ' LoadingScreen(Index)
+   Bload "..\..\MEDIA\FLUID.SIM\FRAMES\" + Ltrim(Str$(Index)) + ".bmp", 0 ' LoadingScreen(Index)
 Next Index
 For Index = 1 to 150
-   Bload "WATER.HOL\FRAMES\" + Ltrim(Str$(Index)) + ".bmp", 0 ' LoadingScreen(Index)
+   Bload "..\..\MEDIA\LANDSCAP\FRAMES\" + Ltrim(Str$(Index)) + ".bmp", 0 ' LoadingScreen(Index)
+Next Index
+For Index = 1 to 150
+   Bload "..\..\MEDIA\LIVING.ROO\FRAMES\" + Ltrim(Str$(Index)) + ".bmp", 0 ' LoadingScreen(Index)
+Next Index
+For Index = 1 to 150
+   Bload "..\..\MEDIA\MODERNES.WOH\FRAMES\" + Ltrim(Str$(Index)) + ".bmp", 0 ' LoadingScreen(Index)
+Next Index
+For Index = 1 to 150
+   Bload "..\..\MEDIA\WATER.HOL\FRAMES\" + Ltrim(Str$(Index)) + ".bmp", 0 ' LoadingScreen(Index)
 Next Index
 End
 
