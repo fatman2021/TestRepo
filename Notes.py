@@ -137,3 +137,67 @@ for i in range( 3 ):
     bpy.ops.logic.controller_add(object='Camera')
     
 # End Game 1
+
+# Game 2
+
+import bpy
+
+bpy.ops.object.camera_add()
+bpy.ops.transform.translate(value=(0, 0, 6.2321))
+bpy.ops.transform.rotate(value=1.5708, axis=(1, 0, 0))
+bpy.ops.logic.sensor_add(type='MOUSE')
+bpy.ops.logic.actuator_add(type='MOUSE')
+bpy.ops.logic.controller_add(object='Camera')
+
+bpy.ops.mesh.primitive_cube_add()
+bpy.context.object.game.physics_type = 'CHARACTER'
+bpy.ops.transform.translate(value=(0, 0, 3.78662))
+bpy.ops.logic.sensor_add(type='MOUSE')
+bpy.ops.logic.actuator_add(type='MOUSE')
+bpy.ops.logic.controller_add(object='Cube')
+
+for i in range(5):
+    bpy.ops.logic.sensor_add(type='KEYBOARD')
+    bpy.ops.logic.actuator_add(type='MOTION')
+    bpy.ops.logic.controller_add(object='Cube')
+
+bpy.data.objects['Camera'].select = True
+bpy.ops.object.parent_set(type='OBJECT', keep_transform=False)
+
+bpy.ops.mesh.primitive_plane_add()
+bpy.ops.transform.resize(value=(60, 60, 60))
+bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+
+bpy.ops.object.editmode_toggle()
+bpy.ops.uv.unwrap(method='ANGLE_BASED', margin=0.001)
+bpy.ops.object.editmode_toggle()
+bpy.ops.material.new()
+bpy.ops.texture.new()
+
+bpy.ops.mesh.primitive_monkey_add()
+bpy.ops.transform.translate(value=(0, 15.19031, 2.25481))
+bpy.ops.transform.resize(value=(3.6531, 3.6531, 3.6531))
+bpy.ops.transform.rotate(value=0.586864, axis=(-1, -2.22045e-16, 0))
+
+active_object = bpy.context.active_object
+material = bpy.data.materials.new("Suzanne_Mat")
+active_object.data.materials.append(material)
+bpy.context.object.active_material.diffuse_color = (0.8, 0.137856, 0.0496239)
+
+bpy.ops.object.modifier_add(type='SUBSURF')
+bpy.context.object.modifiers["Subsurf"].levels = 2
+
+bpy.ops.object.shade_smooth()
+bpy.context.object.game.use_collision_bounds = True
+
+bpy.context.object.game.collision_bounds_type = 'SPHERE'
+bpy.context.object.game.physics_type = 'RIGID_BODY'
+
+bpy.ops.object.lamp_add()
+bpy.context.object.data.type = 'SUN'
+bpy.ops.transform.translate(value=(0, 15.19031, 31.5536))
+bpy.context.object.data.use_shadow = True
+bpy.context.object.data.ge_shadow_buffer_type = 'VARIANCE'
+bpy.context.scene.game_settings.material_mode = 'GLSL'
+
+# End Game 2
