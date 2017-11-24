@@ -201,3 +201,96 @@ bpy.context.object.data.ge_shadow_buffer_type = 'VARIANCE'
 bpy.context.scene.game_settings.material_mode = 'GLSL'
 
 # End Game 2
+
+# Game 3
+
+import bpy
+
+bpy.context.scene.name = "SceneGame"
+bpy.context.scene.render.resolution_x = 640
+bpy.context.scene.render.resolution_y = 480
+bpy.context.scene.render.resolution_percentage = 100
+bpy.context.scene.render.engine = 'BLENDER_GAME'
+bpy.ops.mesh.primitive_cube_add()
+bpy.ops.transform.translate(value=(-0, -5.188273, 2))
+bpy.context.object.game.physics_type = 'CHARACTER'
+bpy.ops.logic.sensor_add(type='KEYBOARD')
+bpy.ops.logic.actuator_add(type='MOTION')
+bpy.ops.logic.controller_add(object="Cube")
+
+bpy.ops.logic.sensor_add(type='COLLISION')
+bpy.ops.logic.actuator_add(type='SCENE')
+bpy.ops.logic.actuator_add(type='MOUSE')
+bpy.ops.logic.controller_add(object="Cube")
+
+
+
+bpy.ops.mesh.primitive_monkey_add()
+bpy.ops.transform.translate(value=(-0.109028, 1.59881, 0.827893))
+bpy.ops.transform.resize(value=(2.24086, 2.24086, 2.24086))
+bpy.ops.transform.rotate(value=0.65906, axis=(-1, -0, -0))
+active_object = bpy.context.active_object
+material = bpy.data.materials.new("Suzanne_Mat")
+active_object.data.materials.append(material)
+bpy.context.object.active_material.diffuse_color = (1, 0, 0)
+
+bpy.ops.mesh.primitive_plane_add()
+bpy.ops.transform.resize(value=(12, 12, 12))
+
+bpy.ops.scene.new(type='NEW')
+bpy.context.scene.name = "SceneLose"
+bpy.context.scene.render.resolution_x = 640
+bpy.context.scene.render.resolution_y = 640
+bpy.context.scene.render.resolution_percentage = 100
+bpy.context.scene.render.engine = 'BLENDER_GAME'
+bpy.ops.object.camera_add()
+bpy.ops.object.rotation_clear(clear_delta=False)
+bpy.ops.transform.translate(value=(0, 0, 6.23475))
+bpy.context.object.data.type = 'ORTHO'
+bpy.ops.object.text_add()
+bpy.ops.object.editmode_toggle()
+bpy.ops.font.delete(type='ALL')
+bpy.ops.font.text_insert(text="YOU LOSE")
+bpy.ops.object.editmode_toggle()
+bpy.ops.transform.translate(value=(-2.28259, 0, 0))
+bpy.ops.object.convert(target='MESH')
+active_object = bpy.context.active_object
+material = bpy.data.materials.new("Lose_Mat")
+active_object.data.materials.append(material)
+bpy.context.object.active_material.diffuse_color = (1, 0, 0)
+bpy.context.object.active_material.diffuse_intensity = 1
+bpy.context.object.active_material.specular_intensity = 0
+bpy.context.object.active_material.use_shadeless = True
+bpy.ops.mesh.primitive_cube_add()
+bpy.ops.transform.translate(value=(-.04291, -1.145425, -0))
+bpy.ops.transform.resize(value=(2.5,  0.49923,  0.49923))
+active_object = bpy.context.active_object
+material = bpy.data.materials.new("Block_Mat")
+active_object.data.materials.append(material)
+bpy.context.object.active_material.diffuse_color = (0, 1, 0)
+bpy.context.object.active_material.diffuse_intensity = 1
+bpy.context.object.active_material.specular_intensity = 0
+bpy.context.object.active_material.use_shadeless = True
+bpy.ops.object.text_add()
+bpy.ops.transform.translate(value =(-1.10,-1.44699, 1.15))
+bpy.ops.object.editmode_toggle()
+bpy.ops.font.delete(type='ALL')
+bpy.ops.font.text_insert(text="RETRY")
+bpy.ops.object.editmode_toggle()
+bpy.ops.object.convert(target='MESH')
+active_object = bpy.context.active_object
+material = bpy.data.materials.new("Retry_Mat")
+active_object.data.materials.append(material)
+bpy.context.object.active_material.diffuse_color = (0, 0, 1)
+bpy.context.object.active_material.diffuse_intensity = 1
+bpy.context.object.active_material.specular_intensity = 0
+bpy.context.object.active_material.use_shadeless = True
+bpy.data.objects['Cube.001'].select = True
+bpy.ops.object.join()
+bpy.ops.logic.sensor_add(type='MOUSE')
+bpy.ops.logic.sensor_add(type='MOUSE')
+bpy.ops.logic.controller_add(type='LOGIC_AND')
+bpy.ops.logic.actuator_add(type='SCENE')
+bpy.ops.logic.actuator_add(type='MOUSE')
+
+# End of Game 3
